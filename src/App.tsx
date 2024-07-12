@@ -9,6 +9,8 @@ const App = () => {
   const [deadline, setDeadline] = useState<number>(0);
   const [todo, setTodo] = useState<ITask[]>([]);
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [filter, setFilter] = useState<string>('all');
+  const maxTaskLength = 46;
 
   useEffect(() => {
     const storedTodo = localStorage.getItem('todo');
@@ -25,10 +27,13 @@ const App = () => {
   }, [todo]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.name === 'task') {
-      setTask(event.target.value);
+    const { name, value } = event.target;
+    if (name === 'task') {
+      if (value.length <= maxTaskLength) {
+        setTask(value);
+      }
     } else {
-      setDeadline(Number(event.target.value));
+      setDeadline(Number(value));
     }
   };
 
@@ -37,7 +42,7 @@ const App = () => {
       handleCreateAlert();
       return;
     }
-    const newTask = { taskName: task, deadline: deadline };
+    const newTask: ITask = { taskName: task, deadline: deadline, isCompleted: false };
     const taskExists = todo.some((t) => t.taskName === task);
 
     if (taskExists) {
@@ -49,8 +54,16 @@ const App = () => {
     }
   };
 
-  const completeTask = (taskNameToDel: string): void => {
-    setTodo(todo.filter((task) => task.taskName !== taskNameToDel));
+  const completeTask = (taskNameToToggle: string): void => {
+    setTodo(
+      todo.map((task) =>
+        task.taskName === taskNameToToggle ? { ...task, isCompleted: !task.isCompleted } : task
+      )
+    );
+  };
+
+  const deleteCompletedTasks = (): void => {
+    setTodo(todo.filter((task) => !task.isCompleted));
   };
 
   const handleCreateAlert = () => {
@@ -62,6 +75,20 @@ const App = () => {
 
   const hideAlert = () => {
     setShowAlert(false);
+  };
+
+  const filteredTasks = () => {
+    if (filter === 'completed') {
+      return todo.filter((task) => task.isCompleted);
+    } else if (filter === 'notCompleted') {
+      return todo.filter((task) => !task.isCompleted);
+    } else {
+      return todo;
+    }
+  };
+
+  const deleteTask = (taskNameToDel: string): void => {
+    setTodo(todo.filter((task) => task.taskName !== taskNameToDel));
   };
 
   return (
@@ -100,19 +127,30 @@ const App = () => {
             onChange={handleChange}
           />
           <button onClick={addTask}>Add Task</button>
+          <div className='charCounter'>
+            {task.length}/{maxTaskLength}
+          </div>
         </div>
       </div>
+
       <div className='todoList'>
         <div className='taskCover'>
           <div className='myTasksCover'>
             <span className='myTasks'>My Tasks</span>
           </div>
-          {todo.map((task: ITask, key: number) => (
-            <TodoTask key={key} task={task} completeTask={completeTask} />
+          {filteredTasks().map((task: ITask, key: number) => (
+            <TodoTask key={key} task={task} completeTask={completeTask} deleteTask={deleteTask} />
           ))}
         </div>
+        <div className='btn-cover'>
+            <div className='filterButtons'>
+            <button onClick={() => setFilter('all')}>All Tasks</button>
+            <button onClick={() => setFilter('completed')}>Completed Tasks</button>
+            <button onClick={() => setFilter('notCompleted')}>Not Completed Tasks</button>
+            <button onClick={deleteCompletedTasks}>Delete All Completed</button>
+        </div>
+        </div>
       </div>
-
       <div>
         {showAlert && <CustomAlerts hideAlert={hideAlert} />}
       </div>

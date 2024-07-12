@@ -47,7 +47,10 @@
 
 .inputContainer {
   display: flex;
+  justify-content: center;
+  align-self: center;
   margin-top: 20px;
+  text-align: center;
 }
 
 .header input {
@@ -104,7 +107,6 @@
   flex-direction: column;
   align-items: center;
   min-height: 504px;
-  margin-bottom: 100px;
   padding-bottom: 0px;
   border-bottom: 1px solid lightgray;
   border-left: 1px solid lightgray;
@@ -146,8 +148,70 @@
   background-color: transparent;
 }
 
+.completed{
+  background-color: #b6b5b566 !important;
+}
+
+.completed span{
+  color: rgb(128, 128, 128) !important;
+}
+
+.OneTaskCover {
+  background-color: #fff;
+}
+
+.OneTaskCover.completed {
+  background-color: #d3ffd3; 
+}
+
+.OneTaskCover .task .content span {
+  transition: font-size 0.2s ease;
+}
+
+.btn-cover{
+  height: 60px;
+  display: flex;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0px -5px 5px 1px rgba(0, 0, 0, 0.1);
+
+  margin-bottom: 100px;
+}
+
+.filterButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.filterButtons button {
+  margin: 0 5px;
+  width: 180px; 
+  height: 40px; 
+  border: none;
+  border-radius: 8px;
+  background-color: lightseagreen;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.filterButtons button:hover {
+  background-color: #20c997;
+}
+
+.filterButtons button:active {
+  transform: scale(0.98);
+}
+
+
+
 .task .content {
   flex: 80%;
+  max-width: 80%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -155,17 +219,34 @@
   background-color: transparent;
 }
 
+.charCounter {
+  margin-top: 9px;
+  font-size: 20px;
+  color: #242424;
+  margin-left: 5px;
+}
+
+
+
 .task .content span {
+  font-family: "Playwrite CU", cursive;
+  /* font-size-adjust: 0.545; */
+  overflow: auto;
   color: #000000;
   display: grid;
   place-items: center;
-  width: 100%;
+  max-width: 50%;
+  min-width: 50%;
+  width: 50%;
   height: 100%;
   font-size: 18px;
   border-right: 1px solid lightgray;
   border-left: 1px solid lightgray;
   background-color: transparent;
+  cursor: pointer;
 }
+
+
 
 .task button {
   flex: 20%;
