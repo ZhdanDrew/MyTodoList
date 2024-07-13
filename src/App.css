@@ -1,4 +1,4 @@
-
+/* Base styles */
 
 .App {
   display: flex;
@@ -6,7 +6,6 @@
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  height: auto;
   font-family: Arial, Helvetica, sans-serif;
   background-image: url(https://thumbs.dreamstime.com/b/vector-simple-graph-paper-seamless-background-abstract-blueprint-illustration-143242424.jpg);
 }
@@ -51,6 +50,7 @@
   align-self: center;
   margin-top: 20px;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .header input {
@@ -148,11 +148,11 @@
   background-color: transparent;
 }
 
-.completed{
+.completed {
   background-color: #b6b5b566 !important;
 }
 
-.completed span{
+.completed span {
   color: rgb(128, 128, 128) !important;
 }
 
@@ -168,16 +168,14 @@
   transition: font-size 0.2s ease;
 }
 
-.btn-cover{
-  height: 60px;
+.btn-cover {
+  height: 50px;
   display: flex;
   width: 70%;
   justify-content: center;
   align-items: center;
   background-color: #fff;
   box-shadow: 0px -5px 5px 1px rgba(0, 0, 0, 0.1);
-
-  margin-bottom: 100px;
 }
 
 .filterButtons {
@@ -188,8 +186,8 @@
 
 .filterButtons button {
   margin: 0 5px;
-  width: 180px; 
-  height: 40px; 
+  width: 180px; /* Adjust width as needed */
+  height: 40px; /* Adjust height as needed */
   border: none;
   border-radius: 8px;
   background-color: lightseagreen;
@@ -206,8 +204,6 @@
 .filterButtons button:active {
   transform: scale(0.98);
 }
-
-
 
 .task .content {
   flex: 80%;
@@ -226,11 +222,8 @@
   margin-left: 5px;
 }
 
-
-
 .task .content span {
   font-family: "Playwrite CU", cursive;
-  /* font-size-adjust: 0.545; */
   overflow: auto;
   color: #000000;
   display: grid;
@@ -246,8 +239,6 @@
   cursor: pointer;
 }
 
-
-
 .task button {
   flex: 20%;
   height: 100%;
@@ -258,7 +249,7 @@
   transition: background-color 0.4s ease;
 }
 
-.task button:hover{
+.task button:hover {
   background-color: rgb(100, 203, 153);
 }
 
@@ -270,10 +261,6 @@
 .trash:hover {
   font-size: 35px;
   transform: rotate(20deg);
-}
-
-.trash {
-  transition: font-size 0.4s ease, transform 0.4s ease;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
@@ -473,4 +460,70 @@ h1 {
   top: 18px;
   font-size: 2rem;
   color: #842029;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+  .Title {
+    font-size: 2rem;
+  }
+
+  .header input {
+    width: 80%;
+  }
+
+  .filterButtons button {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .taskCover {
+    width: 90%;
+  }
+
+  .btn-cover {
+    width: 90%;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  .Title {
+    font-size: 1.5rem;
+  }
+
+  .header input {
+    width: 70%;
+  }
+
+  .filterButtons button {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .taskCover {
+    width: 100%;
+  }
+
+  .btn-cover {
+    width: 100%;
+  }
+
+  .OneTaskCover .task .content span {
+    font-size: 16px;
+  }
+
+  .myTasks {
+    font-size: 24px;
+  }
+
+  .charCounter {
+    font-size: 16px;
+  }
+
+  .task .content span {
+    font-size: 16px;
+  }
 }
